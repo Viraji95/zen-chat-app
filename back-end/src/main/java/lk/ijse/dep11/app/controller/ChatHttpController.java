@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.ConstraintViolationException;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -33,7 +35,10 @@ public class ChatHttpController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json", produces = "application/json")
     @Validated
-    public String sendMessage(){
-        return "hello";
+    public Map<String,String> sendMessage(@RequestBody Map<
+            @Pattern(regexp = "^message$", message = "Invalid chat message") String,
+            @NotBlank(message = "Chat message can't be empty") String> messageObj){
+        chatMessages.add(messageObj.get("message"));
+        return messageObj;
     }
 }
