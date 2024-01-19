@@ -4,7 +4,9 @@
 }
 
 body {
-    background: radial-gradient(#c4f63c, #12ba44);
+    /* background: radial-gradient(#c4f63c, #12ba44); */
+    background: radial-gradient(#3cdaf6, #12ba44);
+    /* background: radial-gradient(#6b3cf6, #090404); */
     width: 100vw;
     height: 100vh; 
     overflow-x: hidden; 
@@ -81,4 +83,44 @@ main, #output-wrapper {
     background-size: contain;
     cursor: pointer;
     position: relative
+}
+
+#account-details {
+    position: absolute;
+    width: 200px;
+    right: 0;
+    top: calc(100% + 2px);
+    /* background: radial-gradient(#1cee4d, #088b20); 
+    border-radius: 10px;  */
+    text-align: right;
+    /* padding: 5px; */
+    z-index: 9999;
+
+    background: rgba(255, 255, 255, 0.56);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+}
+
+#user-email {
+    color: gray;
+    font-size: 0.8rem;
+    padding-right: 10px;
+}
+
+#user-name {
+    padding: 10px 10px 0;
+}
+
+#btn-sign-out {
+    text-align: center;
+    padding: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: radial-gradient(#1ceece, #07771b);
+    border-radius: 10px;
+    
 }

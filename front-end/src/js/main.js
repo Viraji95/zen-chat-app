@@ -10,6 +10,7 @@ const loginOverlayElm = document.querySelector("#login-overlay");
 const userNameElm = document.querySelector("#user-name");
 const userEmailElm = document.querySelector("#user-email");
 const accountElm = document.querySelector("#account");
+const btnSignOutElm = document.querySelector("#btn-sign-out");
 const { API_BASE_URL } = process.env;
 
 const user = {
@@ -25,7 +26,32 @@ onAuthStateChanged(auth, (loggedUser) => {
         user.picture = loggedUser.photoURL;
         finalizeLogin();
         loginOverlayElm.classList.add('d-none');
+    }else {
+        user.email = null;
+        user.name = null;
+        user.picture = null;
+        loginOverlayElm.classList.remove('d-none');
     }
+});
+
+accountElm.addEventListener('click', (e) => {
+    accountElm.querySelector("#account-details")
+    .classList.remove('d-none');
+    e.stopPropagation();
+});
+
+document.addEventListener('click', () => {
+    accountElm.querySelector("#account-details")
+    .classList.add('d-none');
+});
+
+
+
+btnSignOutElm.addEventListener('click', (e)=> {
+    accountElm.querySelector("#account-details")
+        .classList.add('d-none');
+    e.stopPropagation();
+    signOut(auth);
 });
 
 btnSendElm.addEventListener('click', () =>{
