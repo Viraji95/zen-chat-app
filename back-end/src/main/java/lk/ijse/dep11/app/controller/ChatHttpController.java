@@ -33,7 +33,7 @@ public class ChatHttpController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json", produces = "application/json")
     @Validated
-    public Map<String, String> sendMessage(){
-
+    public String sendMessage(){
+        return "hello";
     }
 }
