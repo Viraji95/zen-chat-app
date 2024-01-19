@@ -3,6 +3,16 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background: radial-gradient(#f69d3c, #3f87a6);
+}
+
 #output {
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#output > div:last-child {
+    margin-bottom: 0;
 }
