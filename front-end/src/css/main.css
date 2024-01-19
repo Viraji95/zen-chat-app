@@ -43,3 +43,30 @@ border: 1px solid rgba(255, 255, 255, 0.3);padding: 10px;
 #output > div:last-child {
     margin-bottom: 0;
 }
+
+main, #output-wrapper {
+    height: 0;
+}
+
+.message.me {
+    align-self: flex-end;
+    background-color: rgb(208, 242, 255);
+
+}
+
+#output::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #e0e0e0;
+}
+
+#output::-webkit-scrollbar-thumb{
+    background: rgb(12, 144, 196);
+}
+
+#login-overlay {
+    background-color: rgba(0, 0, 0, 0.85);
+    position: fixed;
+    left: 0;
+    top: 0;
+}
