@@ -13,11 +13,39 @@
     <script type="module" src="js/main.js"></script>
 
 </head>
-<body>
-    <header>
+<body class="d-flex flex-column vh-100">
+    <header class="p-2 border-bottom 
+                    d-flex jusjustify-content-between">
         <div>
             <h1>Zen Chat</h1>
         </div>
+        <div id="account">  
+            <div id="account-details" class="d-none">
+                <div>Name</div>
+                <div>Email</div>
+                <div>Sign Out</div>
+            </div>
+        </div>
     </header>
+    <main class="flex-grow-1 d-flex flex-column">
+        <div id="output-wrapper" class="border flex-grow-1 pb-2">
+            <div id="output" class="p-2 h-100"></div>
+        </div>
+        <form action="javascript:void(0)" class="border-top d-flex gap-2 p-2" >
+            <input class="form-control" id="txt-message" type="text" placeholder="Eg: Hello guys!">
+            <button class="btn btn-primary" id="btn-send">Send</button>
+        </form>
+    </main>
+    <div id="login-overlay" class="vw-100 d-none vh-100 
+            d-flex align-items-center
+            justify-content-center">
+            <div class="wrapper text-center">
+                <h2 class="text-white">Welcome to Zen Chat</h2>
+                <h3 class="text-white">Sign In</h3>
+                <button id="btn-sign-in" class="btn btn-primary mt-2">
+                    Sign In with Google
+                </button>
+            </div>
+        </div>
 </body>
 </html>
