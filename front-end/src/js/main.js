@@ -1,6 +1,7 @@
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '../firebase.js';
-console.log(auth);
 
+const provider = new GoogleAuthProvider();
 const txtMessageElm = document.querySelector("#txt-message");
 const btnSendElm = document.querySelector("#btn-send");
 const outputElm = document.querySelector("#output");
@@ -40,3 +41,7 @@ function addChatMessageRecord({message, email}) {
     messageElm.innerText = message;
     
 }
+
+
+signInWithPopup(auth, provider)
+
