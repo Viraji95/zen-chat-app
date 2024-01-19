@@ -5,6 +5,8 @@ const provider = new GoogleAuthProvider();
 const txtMessageElm = document.querySelector("#txt-message");
 const btnSendElm = document.querySelector("#btn-send");
 const outputElm = document.querySelector("#output");
+const btnSignInElm = document.querySelector("#btn-sign-in");
+const loginOverlayElm = document.querySelector("#login-overlay")
 const { API_BASE_URL } = process.env;
 
 btnSendElm.addEventListener('click', () =>{
@@ -43,5 +45,8 @@ function addChatMessageRecord({message, email}) {
 }
 
 
-signInWithPopup(auth, provider)
+btnSignInElm.addEventListener('click', () => {
+    signInWithPopup(auth, provider)
+    
+})
 
