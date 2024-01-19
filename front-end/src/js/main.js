@@ -6,8 +6,27 @@ const txtMessageElm = document.querySelector("#txt-message");
 const btnSendElm = document.querySelector("#btn-send");
 const outputElm = document.querySelector("#output");
 const btnSignInElm = document.querySelector("#btn-sign-in");
-const loginOverlayElm = document.querySelector("#login-overlay")
+const loginOverlayElm = document.querySelector("#login-overlay");
+const userNameElm = document.querySelector("#user-name");
+const userEmailElm = document.querySelector("#user-email");
+const accountElm = document.querySelector("#account");
 const { API_BASE_URL } = process.env;
+
+const user = {
+    email: null,
+    name: null,
+    picture: null
+};
+
+onAuthStateChanged(auth, (loggedUser) => {
+    if(loggedUser) {
+        user.email = loggedUser.email;
+        user.name = loggedUser.displayName;
+        user.picture = loggedUser.photoURL;
+        finalizeLogin();
+        loginOverlayElm.classList.add('d-none');
+    }
+});
 
 btnSendElm.addEventListener('click', () =>{
     const message = txtMessageElm.value.trim();
@@ -47,6 +66,20 @@ function addChatMessageRecord({message, email}) {
 
 btnSignInElm.addEventListener('click', () => {
     signInWithPopup(auth, provider)
+    .then(res => {
+        user.name = res.user.displayName;
+        user.email = res.user.email;
+        user.picture = res.user.photoURL;
+        loginOverlayElm.classList.add('d-none');
+        finalizeLogin();
+    }).catch(err => alert("Failed to sign in"));
     
-})
+});
+
+function finalizeLogin() {
+    userNameElm.innerText = user.name;
+    userEmailElm.innerText = user.email;
+    accountElm.style.backgroundImage = `url(${user.picture})`;
+}
+
 

@@ -5,7 +5,16 @@
 
 body {
     background: radial-gradient(#c4f63c, #12ba44);
+    width: 100vw;
+    height: 100vh; 
+    overflow-x: hidden; 
 }
+
+/* header {
+    margin-right: 25px;
+    margin-left: 10px;
+    
+} */
 
 #title {
     font-style: oblique;
@@ -20,7 +29,8 @@ body {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8.6px);
     -webkit-backdrop-filter: blur(8.6px);
-    border: 1px solid rgba(255, 255, 255, 0.3);padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
 
 
 
@@ -49,10 +59,10 @@ main, #output-wrapper {
 #output::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background-color: #e0e0e0;
-}
-
-#output::-webkit-scrollbar-thumb{
+    background-color: #e0e0e0; /* or add it to the track */
+  }
+  
+#output::-webkit-scrollbar-thumb {
     background: rgb(12, 144, 196);
 }
 
@@ -70,5 +80,5 @@ main, #output-wrapper {
     border-radius: 50%;
     background-size: contain;
     cursor: pointer;
-    position: relative;
+    position: relative
 }
