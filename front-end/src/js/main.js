@@ -19,6 +19,8 @@ const user = {
     picture: null
 };
 
+let ws = null;
+
 onAuthStateChanged(auth, (loggedUser) => {
     if(loggedUser) {
         user.email = loggedUser.email;
@@ -26,11 +28,22 @@ onAuthStateChanged(auth, (loggedUser) => {
         user.picture = loggedUser.photoURL;
         finalizeLogin();
         loginOverlayElm.classList.add('d-none');
+        if(!ws) {
+            ws = new WebSocket(`${API_BASE_URL}/messages`);
+            ws.addEventListener('message', loadNewChatMessages);
+            ws.addEventListener('error', ()=> {
+                alert("Connection failure, try refreshing the application");
+            });
+        }
     }else {
         user.email = null;
         user.name = null;
         user.picture = null;
         loginOverlayElm.classList.remove('d-none');
+        if(ws){
+            ws.close();
+            ws = null;
+        }
     }
 });
 
@@ -58,31 +71,44 @@ btnSendElm.addEventListener('click', () =>{
     const message = txtMessageElm.value.trim();
     if(!message) return;
     const msgObj = {
-        message
+        message,
+        email: user.email
     }
 
-    fetch(`${API_BASE_URL}/messages`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(msgObj)
-    }).then(res => {
-        if(res.ok){
-            addChatMessageRecord(msgObj);
-            outputElm.scrollTo(0, outputElm.scrollHeight);
-            txtMessageElm.value = '';
-            txtMessageElm.focus();
+    ws.send(JSON.stringify(msgObj));
+    addChatMessageRecord(msgObj);
+    outputElm.scrollTo(0, outputElm.scrollHeight);
+    txtMessageElm.value = '';
+    txtMessageElm.focus();
+
+    // fetch(`${API_BASE_URL}/messages`, {
+    //     method: 'POST',
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(msgObj)
+    // }).then(res => {
+    //     if(res.ok){
+    //         addChatMessageRecord(msgObj);
+    //         outputElm.scrollTo(0, outputElm.scrollHeight);
+    //         txtMessageElm.value = '';
+    //         txtMessageElm.focus();
             
-        }else {
-            alert("Failed to send the message, please try again");
-        }
-    }).catch(err => alert("Failed to connect with the server, please try again later"))
+    //     }else {
+    //         alert("Failed to send the message, please try again");
+    //     }
+    // }).catch(err => alert("Failed to connect with the server, please try again later"))
 });
 
 function addChatMessageRecord({message, email}) {
     const messageElm = document.createElement('div');
     messageElm.classList.add('message')
+
+    if(email === user.email){
+        messageElm.classList.add('me');
+    }else {
+        messageElm.classList.add('others');
+    }
 
     outputElm.append(messageElm);
     messageElm.innerText = message;
@@ -106,6 +132,11 @@ function finalizeLogin() {
     userNameElm.innerText = user.name;
     userEmailElm.innerText = user.email;
     accountElm.style.backgroundImage = `url(${user.picture})`;
+}
+
+function loadNewChatMessages(e) {
+    const msg = JSON.parse(e.data);
+    addChatMessageRecord(msg);
 }
 
 

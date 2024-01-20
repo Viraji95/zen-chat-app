@@ -12,11 +12,6 @@ body {
     overflow-x: hidden; 
 }
 
-/* header {
-    margin-right: 25px;
-    margin-left: 10px;
-    
-} */
 
 #title {
     font-style: oblique;
@@ -82,7 +77,9 @@ main, #output-wrapper {
     border-radius: 50%;
     background-size: contain;
     cursor: pointer;
-    position: relative
+    position: relative;
+    border:3px solid lime;
+    
 }
 
 #account-details {
@@ -122,5 +119,6 @@ main, #output-wrapper {
     border-bottom-right-radius: 5px;
     background: radial-gradient(#1ceece, #07771b);
     border-radius: 10px;
+    
     
 }
