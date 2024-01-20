@@ -11,6 +11,7 @@ const userNameElm = document.querySelector("#user-name");
 const userEmailElm = document.querySelector("#user-email");
 const accountElm = document.querySelector("#account");
 const btnSignOutElm = document.querySelector("#btn-sign-out");
+const loaderElm = document.querySelector("#loader");
 const { API_BASE_URL } = process.env;
 
 const user = {
@@ -22,6 +23,7 @@ const user = {
 let ws = null;
 
 onAuthStateChanged(auth, (loggedUser) => {
+    loaderElm.classList.add('d-none');
     if(loggedUser) {
         user.email = loggedUser.email;
         user.name = loggedUser.displayName;
