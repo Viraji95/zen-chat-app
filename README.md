@@ -2,6 +2,12 @@
 
 Zen Chat App is a real-time chat application built with Spring as the backend, WebSocket for real-time communication, Hibernate Validator for input validation, and Jackson Data Bind for JSON processing. The front end is implemented using HTML5, CSS, JavaScript, Bootstrap, and is bundled with Parcel. The application is hosted on Firebase.
 
+
+
+https://github.com/Viraji95/zen-chat-app/assets/139902658/d824f3bf-07cc-4e0f-8217-2de6ae813336
+
+
+
 ## Features
 
 - Real-time chat functionality
